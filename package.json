@@ -1,0 +1,22 @@
+{
+  "name": "estudo-alura-casa-trabalho",
+  "version": "1.0.0",
+  "description": "prática de node conforme o curso da alura",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArthurAlesi/estudo-alura-casa-trabalho.git"
+  },
+  "author": "Arthur Alesi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArthurAlesi/estudo-alura-casa-trabalho/issues"
+  },
+  "homepage": "https://github.com/ArthurAlesi/estudo-alura-casa-trabalho#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
