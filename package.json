@@ -18,5 +18,8 @@
   "homepage": "https://github.com/ArthurAlesi/estudo-alura-casa-trabalho#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
