@@ -1,0 +1,1 @@
+alter table `agenda-petshop`.atendimentos add data datetime not null, add dataCriacao datetime  not null
