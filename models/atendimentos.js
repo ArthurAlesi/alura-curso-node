@@ -3,10 +3,17 @@ const conexao = require('../infraestrtura/conexao')
 class Atendimento {
 
     adiciona(atendimento, res) {
-        const dataCriacao = moment().format('YYYY-MM-DD HH:MM:SS')
-        const data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:MM:SS')
-        const dataEhValida = moment(data).isSameOrAfter(dataCriacao)
-        const clienteEhValido = atendimento.cliente.lentgh >= 1
+        const dataCriacao = moment().format('YYYY-MM-DD HH:mm:ss')
+        const data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss')
+        const dataEhValida = moment(data, 'YYYY-MM-DD').isSameOrAfter(dataCriacao, 'YYYY-MM-DD')
+        const clienteEhValido = atendimento.cliente.length >= 1
+        
+        console.log("-=-=-=-=-=-=-=-=-=")
+        console.log(dataCriacao)
+        console.log(data)
+        console.log(dataEhValida)
+
+
 
         const validacoes = [
             {
