@@ -7,7 +7,7 @@ class Atendimento {
         const data = moment(atendimento.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss')
         const dataEhValida = moment(data, 'YYYY-MM-DD').isSameOrAfter(dataCriacao, 'YYYY-MM-DD')
         const clienteEhValido = atendimento.cliente.length >= 1
-        
+
         console.log("-=-=-=-=-=-=-=-=-=")
         console.log(dataCriacao)
         console.log(data)
@@ -52,6 +52,33 @@ class Atendimento {
                 }
             })
         }
+    }
+
+    lista(res) {
+        const sql = "SELECT * FROM Atendimentos"
+
+        conexao.query(sql, (erro, resultados) => {
+            if (erro) {
+                res.status(400).json()
+            } else {
+                res.status(200).json(resultados)
+            }
+        })
+
+    }
+
+    buscaPorId(id, res) {
+        const sql = `select * from Atendimentos where id = ${id}`
+
+        conexao.query(sql, (erro, resultados) => {
+            const atendimento = resultados[0]
+            if(erro){
+                res.status(400).json(erro)
+            }else {
+                res.status(200).json(atendimento)
+            }
+        }
+        )
     }
 }
 module.exports = new Atendimento
