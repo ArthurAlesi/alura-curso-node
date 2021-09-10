@@ -8,13 +8,6 @@ class Atendimento {
         const dataEhValida = moment(data, 'YYYY-MM-DD').isSameOrAfter(dataCriacao, 'YYYY-MM-DD')
         const clienteEhValido = atendimento.cliente.length >= 1
 
-        console.log("-=-=-=-=-=-=-=-=-=")
-        console.log(dataCriacao)
-        console.log(data)
-        console.log(dataEhValida)
-
-
-
         const validacoes = [
             {
                 nome: 'data',
@@ -29,15 +22,11 @@ class Atendimento {
         ]
 
         const erros = validacoes.filter(campo => !campo.valido)
-
         const existemErros = erros.length
-
         if (existemErros) {
             res.status(400).json(erros)
 
         } else {
-
-
 
             const atendimentoDatado = { ...atendimento, dataCriacao, data }
             const sql = 'Insert Into Atendimentos SET ?'
@@ -47,8 +36,7 @@ class Atendimento {
                     // console.log(erro)
                     res.status(400).json(erro)
                 } else {
-                    // console.log(resultados)
-                    res.status(201).json(resultados)
+                    res.status(201).json(atendimento)
                 }
             })
         }
@@ -56,7 +44,6 @@ class Atendimento {
 
     lista(res) {
         const sql = "SELECT * FROM Atendimentos"
-
         conexao.query(sql, (erro, resultados) => {
             if (erro) {
                 res.status(400).json()
@@ -64,7 +51,6 @@ class Atendimento {
                 res.status(200).json(resultados)
             }
         })
-
     }
 
     buscaPorId(id, res) {
@@ -72,30 +58,41 @@ class Atendimento {
 
         conexao.query(sql, (erro, resultados) => {
             const atendimento = resultados[0]
-            if(erro){
+            if (erro) {
                 res.status(400).json(erro)
-            }else {
+            } else {
                 res.status(200).json(atendimento)
             }
-        }
-        )
+        })
     }
 
-    altera(id,valores,res){
-        if(valores.data){
+    altera(id, valores, res) {
+        if (valores.data) {
             valores.data = moment(valores.data, 'DD/MM/YYYY').format('YYYY-MM-DD HH:mm:ss')
         }
         const sql = "UPDATE atendimentos SET ? where id=?"
 
         conexao.query(sql, [valores, id], (erro, resultados) => {
-            if(erro){
+            if (erro) {
                 res.status(400).json(erro)
 
             } else {
-                res.status(200).json(resultados)
+                res.status(200).json({...valores,id})
             }
         })
-        
+
+    }
+
+    deleta(id, res) {
+        const sql = "DELETE FROM Atendimentos where id=?"
+
+        conexao.query(sql, id, (erro, resultados) => {
+            if (erro) {
+                res.status(400).json(erro)
+            } else {
+                res.status(200).json({id})
+            }
+        })
     }
 }
 module.exports = new Atendimento
