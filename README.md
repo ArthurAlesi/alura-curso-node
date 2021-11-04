@@ -1,2 +1,4 @@
 # estudo-alura-casa-trabalho
-prática de node conforme o curso da alura
+Esse repositório é uma prática do curso de Node com Express da Alura.
+
+
